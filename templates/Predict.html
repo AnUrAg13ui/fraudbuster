@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+
+{% block title %}PREDICT{% endblock %}
+
+{% block style %}
+    <style>
+        .container {
+            background-color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+        <div class="container p-5 my-5 rounded">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <label for="months_as_customer" class="col-sm-2 col-form-label">Months as Customer</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="months_as_customer" name="months_as_customer">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="age" class="col-sm-2 col-form-label">Age</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="age" name="age">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="policy_csl" class="col-sm-2 col-form-label">Policy CSL</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="policy_csl" name="policy_csl" step="0.01">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="policy_deductable" class="col-sm-2 col-form-label">Policy Deductable</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="policy_deductable" name="policy_deductable" step="0.01">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="policy_annual_premium" class="col-sm-2 col-form-label">Policy Annual Premium</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="policy_annual_premium" name="policy_annual_premium" step="0.01">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="umbrella_limit" class="col-sm-2 col-form-label">Umbrella Limit</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="umbrella_limit" name="umbrella_limit" step="0.01">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="insured_sex" class="col-sm-2 col-form-label">Insured Sex</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" name="insured_sex">
+                            <option selected>Open this select menu</option>
+                            <option value="MALE">MALE</option>
+                            <option value="FEMALE">FEMALE</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="insured_education_level" class="col-sm-2 col-form-label">Insured Education Level</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" name="insured_education_level">
+                            <option selected>Open this select menu</option>
+                            <option value="College">College</option>
+                            <option value="Associate">Associate</option>
+                            <option value="High School">High School</option>
+                            <option value="JD">JD</option>
+                            <option value="Masters">Masters</option>
+                            <option value="MD">MD</option>
+                            <option value="PhD">PhD</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="insured_education_level" class="col-sm-2 col-form-label">Insured Occupation</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" name="insured_occupation">
+                            <option selected>Open this select menu</option>
+                            <option value="adm-clerical">adm-clerical</option>
+                            <option value="armed-forces">armed-forces</option>
+                            <option value="craft-repair">craft-repair</option>
+                            <option value="exec-managerial">exec-managerial</option>
+                            <option value="farming-fishing">farming-fishing</option>
+                            <option value="handlers-cleaners">handlers-cleaners</option>
+                            <option value="machine-op-inspct">machine-op-inspct</option>
+                            <option value="other-service">other-service</option>
+                            <option value="priv-house-serv">priv-house-serv</option>
+                            <option value="prof-specialty">prof-specialty</option>
+                            <option value="protective-serv">protective-serv</option>
+                            <option value="sales">sales</option>
+                            <option value="tech-support">tech-support</option>
+                            <option value="transport-moving">transport-moving</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="insured_relationship" class="col-sm-2 col-form-label">Insured Relationship</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" name="insured_relationship">
+                            <option selected>Open this select menu</option>
+                            <option value="husband">husband</option>
+                            <option value="not-in-family">not-in-family</option>
+                            <option value="other-relative">other-relative</option>
+                            <option value="own-child">own-child</option>
+                            <option value="unmarried">unmarried</option>
+                            <option value="wife">wife</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="capital-gains" class="col-sm-2 col-form-label">Capital Gains</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="capital-gains" name="capital-gains" step="0.01">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="capital-loss" class="col-sm-2 col-form-label">Capital Loss</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="capital-loss" name="capital-loss" step="0.01">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="incident_type" class="col-sm-2 col-form-label">Incident Type</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" name="incident_type">
+                            <option selected>Open this select menu</option>
+                            <option value="Multi-vehicle Collision">Multi-vehicle Collision</option>
+                            <option value="Single Vehicle Collision">Single Vehicle Collision</option>
+                            <option value="Vehicle Theft">Vehicle Theft</option>
+                            <option value="Parked Car">Parked Car</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="collision_type" class="col-sm-2 col-form-label">Collision Type</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" name="collision_type">
+                            <option selected>Open this select menu</option>
+                            <option value="?">NA</option>
+                            <option value="Front Collision">Front Collision</option>
+                            <option value="Rear Collision">Rear Collision</option>
+                            <option value="Side Collision">Side Collision</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="incident_severity" class="col-sm-2 col-form-label">Incident Severity</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" name="incident_severity">
+                            <option selected>Open this select menu</option>
+                            <option value="Minor Damage">Minor Damage</option>
+                            <option value="Major Damage">Major Damage</option>
+                            <option value="Total Loss">Total Loss</option>
+                            <option value="Trivial Damage">Trivial Damage</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="authorities_contacted" class="col-sm-2 col-form-label">Authorities Contacted</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" name="authorities_contacted">
+                            <option selected>Open this select menu</option>
+                            <option value="Ambulance">Ambulance</option>
+                            <option value="Fire">Fire</option>
+                            <option value="None">None</option>
+                            <option value="Other">Other</option>
+                            <option value="Police">Police</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="incident_hour_of_the_day" class="col-sm-2 col-form-label">Incident Hour of the Day</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="incident_hour_of_the_day" name="incident_hour_of_the_day">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="number_of_vehicles_involved" class="col-sm-2 col-form-label">Number of Vehicles Involved</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="number_of_vehicles_involved" name="number_of_vehicles_involved">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="property_damage" class="col-sm-2 col-form-label">Property Damage</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" name="property_damage">
+                            <option selected>Open this select menu</option>
+                            <option value="YES">YES</option>
+                            <option value="NO">NO</option>
+                            <option value="?">NA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="bodily_injuries" class="col-sm-2 col-form-label">Bodily Injuries</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="bodily_injuries" name="bodily_injuries">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="witnesses" class="col-sm-2 col-form-label">Witness</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="witnesses" name="witnesses">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="police_report_available" class="col-sm-2 col-form-label">Police Report Available</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" name="police_report_available">
+                            <option selected>Open this select menu</option>
+                            <option value="YES">YES</option>
+                            <option value="NO">NO</option>
+                            <option value="?">NA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="total_claim_amount" class="col-sm-2 col-form-label">Total Claim Amount</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="total_claim_amount" name="total_claim_amount" step="0.01">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="injury_claim" class="col-sm-2 col-form-label">Injury Claim</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="injury_claim" name="injury_claim" step="0.01">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="property_claim" class="col-sm-2 col-form-label">Property Claim</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="property_claim" name="property_claim" step="0.01">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="vehicle_claim" class="col-sm-2 col-form-label">Vehicle Claim</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="vehicle_claim" name="vehicle_claim" step="0.01">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary px-5">Submit</button>
+                </div>
+            </form>
+        </div>
+{% endblock %}
