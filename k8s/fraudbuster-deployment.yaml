@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fraudbuster
+  namespace: default
+  labels:
+    app: fraudbuster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fraudbuster
+  template:
+    metadata:
+      labels:
+        app: fraudbuster
+    spec:
+      containers:
+      - name: fraudbuster
+        image: nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/anis-project/fraudbuster:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DJANGO_ALLOWED_HOSTS
+          value: "*"
+        - name: DJANGO_DEBUG
+          value: "False"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
