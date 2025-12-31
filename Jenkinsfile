@@ -68,7 +68,7 @@ spec:
         stage('SonarQube Analysis') {
             steps {
                 container('sonar-scanner') {
-                    withCredentials([string(credentialsId: '2401098_Blockvote', variable: 'SONAR_TOKEN')]) {
+                    withCredentials([string(credentialsId: 'FraudBuster', variable: 'sqb_b10899b4a8e30cc3051eeb8fac5751c8a925172e')]) {
                         sh '''
                             sonar-scanner \
                                 -Dsonar.projectKey=fraudbuster \
